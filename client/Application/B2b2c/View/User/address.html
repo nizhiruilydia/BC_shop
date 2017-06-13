@@ -1,0 +1,39 @@
+<include file="Public/header"/>
+
+<div class="b2b2c_layout">
+    <!--头部start-->
+    <header class="b2b2c_public_header_two">管理收货地址</header>
+        <a href="{:U('user/home')}" class="b2b2c_public_back"></a>
+    <!--头部end-->
+    <!--主内容区域start-->
+    <main style="margin-bottom:4.8rem;">
+        <!--默认地址start-->
+        <foreach name="user_address" item="vo">
+            <section class="b2b2c_edit_address_box b2b2c_user_edit_address">
+                <div class="b2b2c_address_show bgcf">
+                    <div class="b2b2c_show_top clearfix">
+                        <span class="fl">{$vo.name}</span>
+                        <span  class="fr">{$vo.tel}</span>
+                    </div>
+                    <p class="b2b2c_show_btm">{$vo.area|areaToName} {$vo.address}</p>
+                </div>
+                <div class="b2b2c_edit_address bgcf clearfix">
+                    <if condition="$vo.is_default eq 1">
+                        <a href="javascript:void(0);" class="active fl">默认地址</a>
+                    <else />
+                        <a href="javascript:void(0);" class="fl" onclick="b2b2cf.set_default_address({$vo.id})">设为默认</a>
+                        <a href="javascript:void(0);" class="fr" onclick="b2b2cf.address_buyers_delete({$vo.id})">删除</a>
+                    </if>
+                </div>
+            </section>            
+        </foreach>
+
+        <!--默认地址end-->
+    </main>
+    <!--主内容区域end-->
+    <footer class="b2b2c_add_address">
+        <a href="{:U('user/add_address')}">添加新地址</a>
+    </footer>
+</div>
+</body>
+</html>

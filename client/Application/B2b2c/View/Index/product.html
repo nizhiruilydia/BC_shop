@@ -1,0 +1,69 @@
+<include file="Public/header"/>
+
+<div class="b2b2c_layout">
+    <!--点击编辑弹出框start-->
+    <div class="b2b2c_cart_pop">
+        <section class="bgcf b2b2c_cart_edit_box">
+            <div class="b2b2c_cart_edit_inner b2b2c_p16">
+                <div class="b2b2c_cart_edit_inner_t clearfix">
+                    <div class="img_box fl"><img src="{$b2b2c_goods_product_one['images'][0]}" alt=""></div>
+                    <div class="div_txt fl">
+                        <div class="div_txt_btm">
+                        <span class="">
+                            <i>&yen;</i>
+                            <i>{$b2b2c_goods_product_one['price']}</i>
+                        </span>
+                        <span>
+                            <i>库存</i>&nbsp;<i>{$b2b2c_goods_product_one['store']}</i>件
+                        </span>
+                         <span>
+                            <i>已选:</i>&nbsp;<i>{$b2b2c_goods_product_one['name']}</i>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="b2b2c_cart_delbtn" onclick="javascript:history.go(-1);"></div>
+                </div>
+                <div class="b2b2c_cart_edit_inner_c">
+                    <ul class="clearfix">
+                        <li>数量</li>
+                        <li>一次最多购买99件</li>
+                        <li>
+                            <a href="#" class="plus fr" onclick="b2b2cf.product_number(parseInt($('#b2b2c_product_number').val())+1);"></a>
+                            <input type="text" value="1" class="fr" id="b2b2c_product_number" autocomplete="off" onBlur="b2b2cf.product_number(parseInt($('#b2b2c_product_number').val()));">
+                            <a href="#" class="minus fr" onclick="b2b2cf.product_number(parseInt($('#b2b2c_product_number').val())-1);"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="b2b2c_cart_edit_inner_b clearfix">
+                    <p class="fl">规格</p>
+                    <ul class="fl">
+						<volist  name="b2b2c_goods_product" id="vo">
+							<?php 
+								if($vo['store'] < 1) {
+									echo '<li class="dashed">';
+								} else if($vo['id'] == $product_id) {
+									echo '<li class="active">';
+								} else {
+									echo '<li>';
+								}
+							?>
+								<!--<a href="{:U('Index/product', array('goods_id'=>$vo['goods_id'], 'product_id'=>$vo['id'], 'product_url'=>$product_url))}">{$vo.name}</a>-->
+								<a href="javascript:" onclick="b2b2cc.refresh('Index/product', 'goods_id:{$vo['goods_id']},product_id:{$vo['id']},rfs:{$rfs}');">{$vo.name}</a>
+							</li>
+						</volist>
+                    </ul>
+                </div>
+            </div>
+            <footer>
+                <input type="button" readonly value="加入购物车" onclick="{$rfs}">
+            </footer>
+        </section>
+    </div>
+    <!--点击编辑弹出框end-->
+</div>
+
+<input type="hidden" id="b2b2c_goods_id" value="{$goods_id}">
+<input type="hidden" id="b2b2c_product_id" value="{$product_id}">
+<input type="hidden" id="b2b2c_rfs" value="{$rfs}">
+
+<include file="Public/footer"/>

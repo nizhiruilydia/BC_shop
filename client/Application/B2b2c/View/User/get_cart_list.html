@@ -1,0 +1,92 @@
+<include file="Public/header"/>
+
+<div class="b2b2c_layout">
+    <!--头部start-->
+	<div style="position:fixed;top:0;left:0;z-index:10;width:100%;">
+    <header class="b2b2c_public_header_two b2b2c_public_header_revamp">
+        <span>购物车</span>
+        <span>(<i class="b2b2c_cart_shop_num">{$count}</i>)</span>
+		<input readonly="" value="编辑" type="button" onclick="b2b2cc.refresh('User/get_cart_list_edit', '', true);">
+		<a href="{:U('Index/index')}" class="b2b2c_public_back"></a>
+    </header>
+	</div>
+    <!--头部end-->
+
+    <!--主内容区域start-->
+    <main class="b2b2c_index_cart">
+        <!--店铺二的商品start-->
+
+			<volist  name="list" id="vo">
+			<section class="b2b2c_index_cart_box bgcf">
+			<div class="b2b2c_shop_name b2b2c_p16 clearfix">
+                <input class="fl" id="{$vo.shop_id}" type="checkbox" onclick="b2b2cf.get_cart_list_checkbox(this);">
+                <a class="toe fl" href="#">{$vo.shop_name}</a>
+            </div>
+				<div class="b2b2c_index_cart_inner_box">
+				<volist  name="vo.list" id="volist">
+				<!--商品一start-->
+				<div class="b2b2c_index_cart_inner">
+					<div class="b2b2c_product_mid clearfix" onclick="b2b2cf.cart_jump_to_goods_info({$volist.goods_id})">
+						<div class="input_box fl">
+							<input 
+							<?php if($volist['product_store'] <= 0)echo 'disabled'; ?>
+							class="b2b2c_checkbox_{$vo.shop_id}" name="goodsinput" value="{$volist.id}" data-product-sum="{$volist.product_price_sum}" type="checkbox" onclick="b2b2cf.get_cart_list_checkbox(this,event);">
+						</div>
+						<a href="#" class="fl"><img src="{$volist['product_image'][0]}" alt=""></a>
+						<div class="b2b2c_box fl">
+							<p class="toe">{$volist.goods_name}</p>
+							<div class="b2b2c_price clearfix">
+								<span class="fl">
+									<i>&yen;</i>
+									<i>{$volist.product_price}</i>
+									<i>&times;</i>
+									<i>{$volist.count}</i>
+								</span>
+								<span class="fr">
+									<i>&yen;</i>
+									<i>{$volist.product_price_sum}</i>
+								</span>
+							</div>
+							<div class="b2b2c_size toe clearfix" onclick="">
+								<i>规格:</i>
+								<i>{$volist.product_name}</i>
+							</div>
+							<div class="b2b2c_size toe clearfix">
+								<i>库存:</i>
+								<i>{$volist.product_store}</i>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--商品一end-->
+				</volist>
+				</div>
+				 </section>
+			</volist>
+        <!--店铺二的商品end-->
+    </main>
+    <!--主内容区域end-->
+    <!--底部结算区域start-->
+    <footer class="b2b2c_cart_footer bgcf">
+        <ul>
+            <li>
+                <input type="checkbox" id="quanxuan" onclick="b2b2cf.get_cart_list_checkbox(this);">
+                <label for="quanxuan">全选</label>
+            </li>
+            <li>
+                <span>合计:</span>
+                <span class="b2b2c_cart_allprice"><i>&yen;</i><i id="b2b2c_product_money_sum">0.0</i></span>
+                <span class="b2b2c_cart_carriage">不含运费</span>
+            </li>
+            <li class="b2b2c_clearing tc" onclick="b2b2cc.actions('User/order_confirm/b2b2c_cart_id/'+$('input[name=\'goodsinput\']:checked').map(function() { return $(this).val(); }).get().join(','));"">
+                <span>去结算:</span>
+                <span>
+                   (<i id="b2b2c_product_sum">0</i>)
+                </span>
+            </li>
+        </ul>
+    </footer>
+    <!--底部结算区域end-->
+</div>
+
+<include file="Public/footer"/>

@@ -1,0 +1,51 @@
+<include file="Public/header"/>
+
+<div class="b2b2c_layout">
+    <!--头部start-->
+    <header class="b2b2c_public_header_two b2b2c_public_header_revamp">
+        添加新地址
+        <input type="button" readonly value="保存" onclick="b2b2cf.add_user_address()">
+        <a href="{:U('user/address')}" class="b2b2c_public_back"></a>
+    </header>
+    <!--头部end-->
+    <!--表单区域start-->
+        <section class="b2b2c_add_new_address">
+            <div class="b2b2c_newadd_inner bgcf">
+                <label for="">收货人</label>
+                <input type="text" autofocus name="name" value="">
+            </div>
+            <div class="b2b2c_newadd_inner bgcf">
+                <label for="">联系电话</label>
+                <input type="text" name="tel" value="">
+            </div>
+            <div class="b2b2c_newadd_inner bgcf b2b2c_address_area_box clearfix">
+                <label for="" class="fl">所在地区</label>
+                <input type="button"class="fl" readonly name="area" id="area" value="">
+                <input type="hidden" class="fl" name="area_id">
+            </div>
+            <div class="b2b2c_newadd_inner bgcf">
+               <textarea name="address" placeholder="填写详细地址，不少于5个字"></textarea>
+            </div>
+            <div class="b2b2c_newadd_inner bgcf">
+                <label for="">邮编</label>
+                <input type="number" name="zip" value="">
+            </div>
+            <div class="b2b2c_newadd_inner bgcf clearfix">
+                <label for="" class="fl">设为默认</label>
+                <input type="image" name="is_default" src="__PUBLICS__/images/icons/030.png" class="fr" value="0" onclick="b2b2cf.add_address_is_default();">
+                <!--点击以后input的image 换成 src="../images/icons/031.png"-->
+            </div>
+        </section>
+    <!--表单区域end-->
+</div>
+<load href="__PUBLICS__/plug/area/areas.js"/>
+<!--地区选择插件-->
+<script type="text/javascript">
+    $("#area").click(function (e) {
+        b2b2cf.SelCity_add(this,e, function(area_id){
+            $('input[name="area_id"]').val(area_id);
+        });
+    });
+</script>
+</body>
+</html>

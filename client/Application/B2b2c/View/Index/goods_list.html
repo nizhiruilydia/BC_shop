@@ -1,0 +1,252 @@
+<include file="Public/header"/>
+
+<load href="__PUBLICS__/plug/dropload/css/dropload.css"/>
+<load href="__PUBLICS__/plug/dropload/js/dropload.min.js"/>
+
+<div class="b2b2c_layout">
+    <!--头部start-->
+    <header class="b2b2c_list_header">
+        <a href="{:U('index/index')}" class="b2b2c_public_back b2b2c_public_back_tstyle"></a>
+    	<input type="hidden" id="b2b2c_goods_list_type_level_1" value="{$type}">
+    	<input type="hidden" id="b2b2c_goods_list_type_level_2" value="{$type_level_2}">
+    	<input type="hidden" id="b2b2c_goods_list_type_level_3" value="{$type_level_3}">
+    	<input type="hidden" id="b2b2c_goods_list_sort" value="{$sort}">
+        <div class="b2b2c_search bgcf clearfix">
+            <div class="fl b2b2c_searching_list" id="b2b2c_list_searbtn" onclick="b2b2cf.goods_list_type_level_1_menu()">
+                <empty name="type">
+                    <img src="__PUBLICS__/images/icons/038.png" />
+                	全部
+                <else />
+                <img src="{$type_image}" />
+               		{$type_name}
+            	</empty>
+            </div>
+            <ul id="b2b2c_list_searlist" style="display: none;">
+                <li>
+                    <a href="{:U('index/goods_list')}">
+                        <img src="__PUBLICS__/images/icons/038.png" alt="">
+                        <p>全部</p>
+                    </a>
+                </li>
+                <foreach name="goods_type_level_1" item="vo">
+	                <li>
+	                    <a href="{:U('index/goods_list', array('type'=>$vo['id']))}">
+	                        <img src="{$vo.image.0}" alt="">
+	                        <p>{$vo.name}</p>
+	                    </a>
+	                </li>
+                </foreach>
+            </ul>
+            <input class="fl b2b2c_search_in" type="text" id="b2b2c_goods_list_keyword" placeholder="{$goods_keyword}" value="{$goods_keyword}">
+            <span onclick="b2b2cf.goods_list_search()"></span>
+        </div>
+        <input class="b2b2c_search_btn" type="button" readonly value="筛选" onclick="b2b2cf.goods_list_filter_show()">
+    </header>
+    <!--头部end-->
+    <!--导航条开始-->
+    <nav class="b2b2c_pro_list_nav bgcf">
+        <ul>
+        	<notempty name="type">
+            	<li class="b2b2c_list_nav_f" onclick="b2b2cf.goods_list_type_level_2_menu()">分类</li>
+        	</notempty>
+            <li class="<?php if($sort==1){echo 'active';}?>" onclick="b2b2cf.goods_list_sort(1)">销量</li>
+            <li class="<?php if($sort==2){echo 'active';}?>" onclick="b2b2cf.goods_list_sort(2)">人气</li>
+            <if condition="$sort eq 3">
+            	<li class="price active" onclick="b2b2cf.goods_list_sort(4)">价格</li>
+            <elseif condition="$sort eq 4" />
+            	<li class="price active go_h" onclick="b2b2cf.goods_list_sort(3)">价格</li>
+            <else />
+            	<li class="price" onclick="b2b2cf.goods_list_sort(3)">价格</li>
+            </if>
+            
+            <li class="<?php if($sort==5){echo 'active';}?>" onclick="b2b2cf.goods_list_sort(5)">新品</li>
+            <li class="<?php if($sort==6){echo 'active';}?>" onclick="b2b2cf.goods_list_sort(6)">评论</li>
+        </ul>
+    </nav>
+    <!--导航条结束-->
+
+    <!--二级导航开始-->
+    <section id="b2b2c_goods_list_type_level_2_section" style="display:none;">
+        <nav class="b2b2c_pro_list_twonav">
+            <ul class="clearfix" id="b2b2c_goods_list_type_level_2_ul" data-loaded='0'>
+            </ul>
+        </nav>
+        <nav class="b2b2c_pro_list_twonav b2b2c_list_lin_nav" id="b2b2c_goods_list_type_level_3_nav" style="display:none;">
+            <ul class="clearfix" id="b2b2c_goods_list_type_level_3_ul">
+
+            </ul>
+        </nav>
+    </section>
+    <!--二级导航结束-->
+    <!--主内容区域start-->
+    <div class="dropload_content">
+        <section class="b2b2c_pro_list_content">
+        	<?php $goods_index = 0;?>
+        	<foreach name="goods_list" item="vo">
+        		<?php $goods_index++;?>
+	            <div class="b2b2c_pro_list_mid bgcf clearfix" data-index="{$goods_index}" onclick="window.location.href = '{:U('Index/goodspointinfo', array('goods_id'=>$vo['id']))}'">
+	                <div class="img_box fl">
+	                    <img src="{$vo.images.0}" alt=""/>
+	                </div>
+	                <div class="b2b2c_info_box fl">
+	                    <p class="toe">{$vo.name}</p>
+	                    <div class="b2b2c_info_box_b clearfix">
+	                        <div class="fl b2b2c_info_box_l">
+	                            <span>&yen;<i>{$vo.product_mktprice}</i></span>
+	                            <span>&yen;<i>{$vo.product_price}</i></span>
+	                        </div>
+	                        <div class="fr b2b2c_info_box_r">
+	                            <div class="clearfix">
+	                                <img class="fr" src="{$vo.brand_logo.0}" alt=""/>
+	                            </div>
+	                            <span>已售 <i>{$vo.sold_count}</i></span>
+	                            <span>评论 <i>{$vo.comments_count}</i></span>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+        	</foreach>
+        </section>
+    </div>
+    <!--主内容区域end-->
+</div>
+<div class="b2b2c_list_choose bgcf" style="display:none;">
+    <section class="b2b2c_p16">
+        <div class="b2b2c_title">产地</div>
+        <ul class="clearfix b2b2c_import_filter_ul">
+        	<foreach name="import_filter" item="vo">
+        		<li class="<?php if((isset($is_import)) && ($is_import==$vo['is_import'])){echo 'active';}?>" data-import="{$vo.is_import}" onclick="b2b2cf.goods_list_filter_select_simple(this)">{$vo.name}</li>
+        	</foreach>
+        </ul>
+    </section>
+    <section class="b2b2c_p16">
+        <div class="b2b2c_title">价格({$price_from}元)</div>
+        <ul class="clearfix b2b2c_price_filter_ul">
+        	<foreach name="price_filter" item="vo">
+        		<li class="<?php if((isset($price_from)) && ($price_from==$vo['price_from'])){echo 'active';}?>" data-from="{$vo.price_from}" data-to="{$vo.price_to}" onclick="b2b2cf.goods_list_filter_select_simple(this)">{$vo.name}</li>
+        	</foreach>
+        </ul>
+    </section>
+    <section class="b2b2c_p16">
+        <div class="b2b2c_title">品牌</div>
+        <ul class="clearfix b2b2c_brand_filter_ul">
+        	<foreach name="brand_filter" item="vo">
+        		<li class="<?php if((isset($brand_id)) && ($brand_id==$vo['brand_id'])){echo 'active';}?>" data-id="{$vo.brand_id}" onclick="b2b2cf.goods_list_filter_select_simple(this)">{$vo.brand_name}</li>
+        	</foreach>
+        </ul>
+    </section>
+    <footer>
+        <div class="b2b2c_confirm_btn" onclick="b2b2cf.goods_list_search()">确定</div>
+    </footer>
+</div>
+<!--<div class="b2b2c_public_shade" style="display:none;"></div>-->
+<script>
+var dropload;
+$(function(){
+    // dropload
+    dropload = $('.dropload_content').dropload({
+        scrollArea : window,
+        domUp : {
+            domClass   : 'dropload-up',
+            domRefresh : '<div class="dropload-refresh">↓下拉刷新</div>',
+            domUpdate  : '<div class="dropload-update">↑释放更新</div>',
+            domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+        },
+        domDown : {
+            domClass   : 'dropload-down',
+            domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+            domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+            domNoData  : '<div class="dropload-noData">暂无更多数据</div>'
+        },
+        loadUpFn : function(me){
+            var get_data = {};
+            get_data.terminal_type = 2;
+
+            var last_goods_index = 0;
+            get_data.last_goods_index = last_goods_index;   
+
+            var type_level_1 = $('#b2b2c_goods_list_type_level_1').val();
+            var type_level_2 = $('#b2b2c_goods_list_type_level_2').val();
+            var type_level_3 = $('#b2b2c_goods_list_type_level_3').val();
+            if(type_level_3 > 0){
+            	get_data.type = type_level_3;
+            }else if(type_level_2 > 0){
+				get_data.type = type_level_2;
+            }else{
+            	get_data.type = type_level_1;
+            }
+
+	        get_data.goods_keyword = $('#b2b2c_goods_list_keyword').val();
+	        get_data.sort = $('#b2b2c_goods_list_sort').val();
+
+	        get_data.is_import = $('.b2b2c_import_filter_ul li.active').data('import');
+	        get_data.price_from = $('.b2b2c_price_filter_ul li.active').data('from');
+	        get_data.price_to = $('.b2b2c_price_filter_ul li.active').data('to');
+	        get_data.brand_id = $('.b2b2c_brand_filter_ul li.active').data('id');
+
+            b2b2cc.curls('B2b2cPublic/GetGoodsBySearch', get_data, function(data) {
+                if(data.status){
+                    var data = data.data.list;
+                    var html = "";
+                    if(data.length > 0){
+                        html = b2b2cf.goods_list_make_list_html(data, last_goods_index);
+                    }
+
+                    $('.b2b2c_pro_list_content').html(html);
+                    me.resetload();
+                    me.unlock();
+                    me.noData(false);
+                }
+
+            }, 'get');
+        },
+        loadDownFn : function(me){
+            var get_data = {};
+            get_data.terminal_type = 2;
+
+            var last_goods_index = $('.b2b2c_pro_list_mid:last').data('index');
+            get_data.last_goods_index = last_goods_index;
+
+            var type_level_1 = $('#b2b2c_goods_list_type_level_1').val();
+            var type_level_2 = $('#b2b2c_goods_list_type_level_2').val();
+            var type_level_3 = $('#b2b2c_goods_list_type_level_3').val();
+            if(type_level_3 > 0){
+            	get_data.type = type_level_3;
+            }else if(type_level_2 > 0){
+				get_data.type = type_level_2;
+            }else{
+            	get_data.type = type_level_1;
+            }
+
+	        get_data.goods_keyword = $('#b2b2c_goods_list_keyword').val();
+	        get_data.sort = $('#b2b2c_goods_list_sort').val();
+
+	        get_data.is_import = $('.b2b2c_import_filter_ul li.active').data('import');
+	        get_data.price_from = $('.b2b2c_price_filter_ul li.active').data('from');
+	        get_data.price_to = $('.b2b2c_price_filter_ul li.active').data('to');
+	        get_data.brand_id = $('.b2b2c_brand_filter_ul li.active').data('id');
+
+            b2b2cc.curls('B2b2cPublic/GetGoodsBySearch', get_data, function(data) {
+                if(data.status){
+                    var data = data.data.list;
+                    var html = "";
+                    if(data.length > 0){
+                        html = b2b2cf.goods_list_make_list_html(data, last_goods_index);
+                    }else{
+                        // 锁定
+                        me.lock();
+                        // 无数据
+                        me.noData();
+                    }
+                    $('.b2b2c_pro_list_content').append(html);
+                    me.resetload();
+                }
+
+            }, 'get');
+        },
+        threshold : 50
+    });
+});
+</script>
+</body>
+</html>

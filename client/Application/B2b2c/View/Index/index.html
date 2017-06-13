@@ -1,0 +1,127 @@
+<include file="Public/header"/>
+<include file="Public/slide"/>
+
+<div class="b2b2c_layout">
+    <!--头部搜索start-->
+    <header class="b2b2c_header">
+        <div class="b2b2c_header_box">
+            <a href="#" class="b2b2c_logo"></a>
+            <form action="#">
+				<span class="b2b2c_icon_search" onclick="b2b2cf.index_type_list_select(this);"></span>
+				<input type="search" onclick="b2b2cf.index_type_list_select(this);" name="keyword" placeholder="搜索"/>
+            </form>
+        </div>
+    </header>
+    <!--头部搜索end-->
+
+    <!--导航栏start-->
+    <nav class="b2b2c_nav">
+        <!--一级导航-->
+        <div class="b2b2c_nav_title">
+            <ul>
+            	<foreach name="goods_type_list" item="vo">
+            		<li class="b2b2c_nav_level_1 {$vo.active}" data-id="{$vo.id}" onclick="b2b2cf.index_switch_goods_type({$vo.id})">
+						<img src="{$vo.image.0}" alt="">
+						{$vo.name}
+					</li>
+            	</foreach>
+            </ul>
+        </div>
+        <!--二级导航-->
+        <foreach name="goods_type_list" item="vo">
+	        <section class="b2b2c_two_nav" style="display:<?php if($vo['active']=='active'){echo 'block';}else{echo 'none';}?>;" data-parentid="{$vo.id}">
+	            <ul class="clearfix">
+	            	<foreach name="vo.child" item="vo2">
+		                <li data-id="{$vo2.id}" onclick="b2b2cf.index_type_level_2_select(this);">
+		                    <a href="javascript:void(0);">
+		                        <img src="{$vo2.image.0}" alt=""/>
+		                        <p>{$vo2.name}</p>
+		                    </a>
+		                </li>            		
+	            	</foreach>
+	            </ul>
+	        </section>
+        </foreach>
+    </nav>
+    <!--导航栏end-->
+    <!--主内容区域start-->
+    <main class="b2b2c_index_main" id="b2b2c_index_main">
+    	<foreach name="recommend_list" item="vot">
+    		<section class="b2b2c_product">
+    			<header style="background-color: <?php if(!empty($vot['color'])){echo $vot['color'];}else{echo '#ea7047';}?>">
+					<img src="{$vot.image.0}" alt=""/>
+					{$vot.name}
+				</header>
+	    		<section class="b2b2c_product_box">
+	    			<ul class=clearfix>
+    					<foreach name="vot.list" item="vog">
+	    					<li>
+		                        <a href="{:U('Index/goodspointinfo', array('goods_id'=>$vog['b2b2c_goods_id']))}">
+		                            <div class="b2b2c_product_imgbox">
+		                                <img src="{$vog.b2b2c_goods_images.0}" alt="">
+		                            </div>
+		                            <p class="b2b2c_product_describe toe">{$vog.b2b2c_goods_name}</p>
+		                            <div class="b2b2c_price_box">
+		                                <span class="b2b2c_price fl"><i>&yen</i>{$vog.b2b2c_product_price}</span>
+		                                <span class="b2b2c_old_price fr"><i>&yen</i>{$vog.b2b2c_product_mktprice}</span>
+		                            </div>
+		                            <div class="b2b2c_product_btm clearfix">
+		                                <div class="b2b2c_product_logo fl">
+		                                    <img src="{$vog.b2b2c_brand_logo.0}" alt="">
+		                                </div>
+		                                <div class="b2b2c_product_numbox fr">
+		                                    <div>
+		                                        <span>已售</span>
+		                                        <span>{$vog.b2b2c_goods_sold_count}</span>
+		                                    </div>
+		                                    <div>
+		                                        <span>评价</span>
+		                                        <span>{$vog.b2b2c_comments_count}</span>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                        </a>    						
+	    					</li>
+    					</foreach>
+    				</ul>
+    			</section>
+    		</section>
+    	</foreach>
+    </main>
+    <!--主内容区域end-->
+    <!--悬浮底部start-->
+    <footer class="b2b2c_index_footer">
+        <div class="b2b2c_index_footer_box">
+            <ul>
+                <li>
+                    <!--谁是当前页给谁的a加上active这个类名，即可变换图标和文字的颜色-->
+                    <a href="#" class="active">
+                        <div class="b2b2c_index_icon"></div>
+                        <p>首页</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('User/get_cart_list')}">
+                        <div class="b2b2c_cart_icon"></div>
+                        <p>购物车</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:U('User/home')}">
+                        <div class="b2b2c_user_icon"></div>
+                        <p>我的博宠</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+    <!--悬浮底部end-->
+    <a href="#" class="b2b2c_return_top" id="b2b2c_return_top"></a>
+</div>
+<script>
+	var swiper = new Swiper('.swiper-container',{
+		pagination: '.swiper-pagination'
+	});
+</script>
+</body>
+</html>

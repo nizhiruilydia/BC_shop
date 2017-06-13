@@ -1,0 +1,238 @@
+<include file="Public/header"/>
+
+<div class="b2b2c_layout" id="b2b2c_buyer_comment_main_div">
+    <!--头部start-->
+    <header class="b2b2c_public_header_two b2b2c_public_header_revamp">
+        <a href="javascript:history.back(-1);" class="b2b2c_public_back"></a>
+        商品评价
+        <input type="button" onclick="b2b2cf.make_comments({$param.shop_id},{$param.goods_id},{$param.product_id},{$param.order_id})" readonly value="提交">
+    </header>
+    <!--头部end-->
+    <!--商品累计评价start-->
+    <div class="b2b2c_product_evaluation_box b2b2c_p16 bgcf clearfix">
+        <p class="fl">商品累计评价</p>
+        <div class="b2b2c_public_shop_star_4 b2b2c_product_evaluation_star fl "></div>
+        <p class="fl">{$score.total_count}</p>
+    </div>
+    <!--商品累计评价end-->
+    <!--商品详情start-->
+    <div class="b2b2c_product_details_box b2b2c_p16 bgcf clearfix">
+        <div class="b2b2c_imgbox">
+            <img class="fl" src="{$product_info.product_images.0}" alt="">
+        </div>
+        <p class="b2b2c_product_title fl b2b2c_ov2">{$product_info.goods_name}</p>
+    </div>
+    <!--商品详情end-->
+
+    <?php if($is_buyer):?>
+    <?php if(empty($mycomments)):?>
+        <!--评价内容start-->
+        <div class="b2b2c_product_evaluation_content_box b2b2c_p16 bgcf">
+            <textarea class="b2b2c_evaluation_content" placeholder="写点儿评价吧，对其他宠友有很大帮助哦！"></textarea>
+            <div class="b2b2c_product_evaluation_img clearfix">
+                <div class="b2b2c_img_box" data-index="1">
+                    <img src="" alt="">
+                    <input onclick="b2b2cf.comments_show_image_upload_div(this)" readonly name="b2b2c_comments_file" value="" class="b2b2c_img_file_upload">
+                    <input type="hidden" name="image_key" value="">
+                </div>
+                <div class="b2b2c_img_box" data-index="2">
+                    <img src="" alt="">
+                    <input onclick="b2b2cf.comments_show_image_upload_div(this)" readonly name="b2b2c_comments_file" value="" class="b2b2c_img_file_upload">
+                    <input type="hidden" name="image_key" value="">
+                </div>
+                <div class="b2b2c_img_box" data-index="3">
+                    <img src="" alt="">
+                    <input onclick="b2b2cf.comments_show_image_upload_div(this)" readonly name="b2b2c_comments_file" value="" class="b2b2c_img_file_upload">
+                    <input type="hidden" name="image_key" value="">
+                </div>
+                <div class="b2b2c_img_box" data-index="4">
+                    <img src="" alt="">
+                    <input onclick="b2b2cf.comments_show_image_upload_div(this)" readonly name="b2b2c_comments_file" value="" class="b2b2c_img_file_upload">
+                    <input type="hidden" name="image_key" value="">
+                </div>
+            </div>
+        </div>
+        <!--评价内容end-->
+
+
+
+    <!--综合评价start-->
+    <div class="b2b2c_product_overall_evaluation b2b2c_p16 bgcf clearfix">
+        <p class="fl">综合评价</p>
+        <span class="fl">满意请给五星哦</span>
+        <span class="clearfix prepare_grade_box">
+            <i onclick="b2b2cf.star_choice(this)" class="prepare_grade"></i>
+            <i onclick="b2b2cf.star_choice(this)" class="prepare_grade"></i>
+            <i onclick="b2b2cf.star_choice(this)" class="prepare_grade"></i>
+            <i onclick="b2b2cf.star_choice(this)" class="prepare_grade"></i>
+            <i onclick="b2b2cf.star_choice(this)" class="prepare_grade"></i>
+        </span>        
+<!--         <div class="b2b2c_public_shop_star_4 b2b2c_overall_evaluation_star fr"></div> -->
+    </div>
+    <!--综合评价end-->
+    <?php else:?>
+    <?php endif;?>
+    <?php endif;?>
+</div>
+
+<div class="wrap_page padlr55" id="b2b2c_buyer_comment_upload_image_div" style="display:none;">
+    <!--头部start-->
+    <header class="b2b2c_public_header_two b2b2c_public_header_revamp">
+        <a href="javascript:void(0);" class="b2b2c_public_back" onclick="b2b2cf.comments_hide_image_upload_div();"></a>
+        选择图片
+    </header>
+    <!--头部end-->    
+    <!--加载资源-->
+    <div class="lazy_tip" id="lazy_tip"><span>1%</span><br> 载入中......</div>
+    <div class="lazy_cover"></div>
+    <div class="resource_lazy hide"></div>
+    <div class="">
+    <!-- <div class="pic_edit"> -->
+        <input type="hidden" id="b2b2c_comment_image_index">
+        <div id="clipArea" class="b2b2c_revamp_imginner"></div>
+        <button id="upload2">选择图片</button>
+        <button id="clipBtn">预览</button>
+        <input type="file" id="file" style="opacity: 0;position: fixed;bottom: -100px">
+        <!--缩略图预览-->
+        <div id="plan" style="display:none">
+            <div class="pointer_canvas">
+                <canvas id="myCanvas"></canvas>
+            </div>
+            <h2 onClick="Close();" class="user_pointer_sure" style="cursor:pointer; display:inline-block">重新选择</h2>
+            <h2 onClick="Submit();" class="user_pointer_sure" style="cursor:pointer; display:inline-block">确定上传</h2>
+            <form action="{:U('User/edit_portrait')}" method="post" id="submit">
+                <input type="hidden" name="image" value="" id="image">
+            </form> 
+        </div>
+    </div>
+    <img src="" fileName="" id="hit" style="display:none;z-index: 9">
+    <div id="cover"></div>
+</div>
+
+<script src="__PUBLICS__/plug/upload/sonic.js"></script>
+<script src="__PUBLICS__/plug/upload/comm.js"></script>
+<script src="__PUBLICS__/plug/upload/hammer.js"></script>
+<script src="__PUBLICS__/plug/upload/iscroll-zoom.js"></script>
+<script src="__PUBLICS__/plug/upload/jquery.photoClip.js?v=1"></script>
+
+<script>
+var hammer = '';
+var currentIndex = 0;
+var body_width = $('body').width();
+var body_height = $('body').height();
+
+$("#clipArea").photoClip({
+    width: body_width *0.9,
+    height: body_width *0.9,
+    file: "#file",
+    view: "#hit",
+    ok: "#clipBtn",
+    loadStart: function () {
+        $('.lazy_tip span').text('');
+        $('.lazy_cover,.lazy_tip').show();
+    },
+    loadComplete: function () {
+        $('.lazy_cover,.lazy_tip').hide();
+    },
+    clipFinish: function (dataURL) {
+        $('#hit').attr('src', dataURL);
+        saveImageInfo();
+    }
+});
+
+//图片上传
+function saveImageInfo() {
+    var filename = $('#hit').attr('fileName');
+    var img_data = $('#hit').attr('src');
+    if(img_data==""){alert('null');}
+    $("#image").val(img_data);
+    render(img_data); 
+}
+
+/*获取文件拓展名*/
+function getFileExt(str) {
+    var d = /\.[^\.]+$/.exec(str);
+    return d;
+}
+
+//图片上传结束
+$(function () {
+    $('#upload2').on('touchend', function () {
+        //图片上传按钮
+        $('#file').click();
+    });
+})
+
+
+function Close(){
+    $('#plan').hide();
+}
+
+// 渲染 Image 缩放尺寸  
+function render(src){  
+     var MAX_HEIGHT = 256;  //Image 缩放尺寸 
+    // 创建一个 Image 对象  
+    var image = new Image();  
+    
+    // 绑定 load 事件处理器，加载完成后执行  
+    image.onload = function(){  
+        // 获取 canvas DOM 对象  
+        var canvas = document.getElementById("myCanvas"); 
+        // 如果高度超标  
+        if(image.height > MAX_HEIGHT) {  
+            // 宽度等比例缩放 *=  
+            image.width *= MAX_HEIGHT / image.height;  
+            image.height = MAX_HEIGHT;  
+        }  
+        // 获取 canvas的 2d 环境对象,  
+        // 可以理解Context是管理员，canvas是房子  
+        var ctx = canvas.getContext("2d");  
+        // canvas清屏  
+        ctx.clearRect(0, 0, canvas.width, canvas.height); 
+        canvas.width = image.width;        // 重置canvas宽高  
+        canvas.height = image.height;  
+        // 将图像绘制到canvas上  
+        ctx.drawImage(image, 0, 0, image.width, image.height);  
+        // !!! 注意，image 没有加入到 dom之中  
+        
+     var dataurl = canvas.toDataURL("image/jpeg");  
+     var imagedata =  encodeURIComponent(dataurl); 
+        $('#plan').attr('data-src',dataurl); 
+      $('#plan').show();
+    };  
+    // 设置src属性，浏览器会自动加载。  
+    // 记住必须先绑定render()事件，才能设置src属性，否则会出同步问题。  
+    image.src = src;    
+};  
+
+function Submit(){
+    b2b2cf.comments_image_upload();
+    Close();
+
+    $('#file').unbind('change').unbind('click');
+    $('#clipBtn').unbind('click');
+
+    $("#clipArea").empty();
+    $("#clipArea").photoClip({
+        width: body_width *0.9,
+        height: body_width *0.9,
+        file: "#file",
+        view: "#hit",
+        ok: "#clipBtn",
+        loadStart: function () {
+            $('.lazy_tip span').text('');
+            $('.lazy_cover,.lazy_tip').show();
+        },
+        loadComplete: function () {
+            $('.lazy_cover,.lazy_tip').hide();
+        },
+        clipFinish: function (dataURL) {
+            $('#hit').attr('src', dataURL);
+            saveImageInfo();
+        }
+    });
+}
+</script>
+
+</body>
+</html>

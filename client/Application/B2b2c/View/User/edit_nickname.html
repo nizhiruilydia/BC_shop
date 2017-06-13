@@ -1,0 +1,24 @@
+<include file="Public/header"/>
+
+<div class="b2b2c_layout">
+    <form action="" method="get">
+        <!--头部start-->
+        <header class="b2b2c_public_header_two b2b2c_public_header_revamp">
+            修改昵称
+            <input type="submit" readonly value="保存">
+            <a href="javascript:history.back(-1);" class="b2b2c_public_back"></a>
+        </header>
+        <!--头部end-->
+
+        <!--主内容区域start-->
+        <main class="b2b2c_revamp_box">
+            <section class="b2b2c_revamp_input bgcf">
+                <input type="text" name="nickname" value="<?php echo I('get.current','','trim'); ?>">
+            </section>
+            <p>请点击更改您的昵称</p>
+        </main>
+        <!--主内容区域end-->
+    </form>
+</div>
+</body>
+</html>

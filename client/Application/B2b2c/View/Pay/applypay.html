@@ -1,0 +1,44 @@
+<include file="Public/header" />
+
+<div class="b2b2c_layout">
+    <!--头部start-->
+    <header class="b2b2c_public_header_two">订单支付</header>
+    <!--头部end-->
+    <form id="b2b2c_applypay_form" action="{:U(Pay/applypay)}" method="post">
+        <input type="hidden" id="b2b2c_apply_pay_sn" name="sn" value="{$sn}"/>
+        <section class="b2b2c_order_pay_box b2b2c_p16 bgcf">
+            <if condition="$multi_order eq 1">  
+                <span>应付金额：</span>
+                <span class="b2b2c_price">
+                    <i>&yen;</i><i>{$order_list[0]['order_sum_amount']}</i>
+                </span>    
+            <else /> 
+                <span>应付金额：</span>
+                <span class="b2b2c_price">
+                    <i>&yen;</i><i>{$order.order_amount}</i>
+                </span>        
+            </if> 
+        </section>
+        <section class="b2b2c_order_payment_method b2b2c_p16 bgcf">
+            <p class="fl">选择支付方式：</p>
+            <input type="hidden" name="pay_type" value="1">
+            <div class="b2b2bc_payment_method fl">
+                <input class="active" type="button" onclick="b2b2cf.applypay_select_alipay(this)" value="支付宝"/>
+                <input type="button" onclick="b2b2cf.applypay_select_unionpay(this)" value="银行卡"/>
+                <!--模拟支付信息-->
+                <php>if(C('ALIPAY.online') != true){</php>
+                    <input type="button" onclick="b2b2cf.applypay_select_testpay(this)" value="模拟支付"/>
+                <php>}</php>
+            </div>
+        </section>
+        <section class="b2b2c_order_bank_card b2b2c_p16 bgcf" style="display:none;">
+            <p class="fl">银行卡号：</p>
+            <input type="text" name="card" value="" placeholder="填写银行卡号" maxlength="19"/>
+        </section>
+        <section class="b2b2c_order_confirm_payment b2b2c_p16">
+            <a href="javascript:void(0);" onclick="b2b2cf.applypay_submit()">确认支付</a>
+        </section>
+    </form>
+</div>
+</body>
+</html>
