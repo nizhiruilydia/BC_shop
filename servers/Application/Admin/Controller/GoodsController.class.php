@@ -30,6 +30,9 @@ class GoodsController extends PrivateController {
 	 * @return HTML
 	 *+--------------------------------------------------------------------------------------------------------------------
 	**/
+	public function index(){
+       echo 111;
+	}
 	
 }
 ?>
