@@ -1,0 +1,248 @@
+<include file="Public/header"/>
+
+<div class="b2b2c_layout">
+    <!--头部start-->
+    <header class="b2b2c_public_header_two">订单详情</header>
+        <a href="javascript:history.back(-1);" class="b2b2c_public_back"></a>
+    <!--头部end-->
+
+                        <?php if(in_array($data['order_status'],array(4,8,9,10))):?>
+                        <div class="b2b2c_public_state_box bgcg">
+                        <?php else:?>
+                        <div class="b2b2c_public_state_box bgcc">
+                        <?php endif;?>
+                            <?php $now_time = time();?>
+                            <?php if($data['order_status'] == 0):?>
+                                <p>订单已过期</p>
+                            <?php elseif($data['order_status'] == 1):?>
+                                <?php if(($now_time - strtotime($data['time_create_str'])) < C('ORDER_RELEVANT_TIME.WAITFORPAY')):?>
+                                    <p>等待买家付款</p>
+                                <?php endif;?>
+                            <?php elseif($data['order_status'] == 2):?>
+                                <p>订单已过期</p>
+                            <?php elseif($data['order_status'] == 3):?>
+                                <p>退单申请中</p>
+                            <?php elseif($data['order_status'] == 4):?>
+                                <p>退单成功</p>
+                            <?php elseif($data['order_status'] == 5 || $data['order_status'] == 6):?>
+                                <?php if($now_time - strtotime($data['pay_time_str']) < C('ORDER_RELEVANT_TIME.WAITFORDELIVER')):?>
+                                    <p>等待卖家发货</p>
+                                <?php endif;?>
+                            <?php elseif($data['order_status'] == 7):?>
+                                <p>交易关闭</p>
+                            <?php elseif($data['order_status'] == 8):?>
+                                <p>交易成功</p>
+                            <?php elseif($data['order_status'] == 9):?>
+                                <p>交易成功</p>
+                            <?php elseif($data['order_status'] == 10):?>
+                                <p>交易成功</p>
+                            <?php endif;?>
+                        </div>
+    <!--待付款状态 青色是类名bgcc-->
+    <!--内容区域start-->
+    <main class="b2b2c_order_submit_lay">
+        <section class="b2b2c_order_title b2b2c_order_title_2 bgcf b2b2c_p16">
+            <div class="b2b2c_tit clearfix">
+                <span class="fl">收件人:</span>
+                <span class="fl">{$data.shipping_name}</span>
+                <span class="fr">{$data.shipping_tel}</span>
+            </div>
+            <p class="b2b2c_ov2">收货地址:{$data.shipping_area|areaToName} {$data.shipping_address}</p>
+            <div class="cl"></div>
+        </section>
+        <section  class="b2b2c_order_invoice_show bgcf b2b2c_p16">
+            <if condition="$data.invoice_type neq 0">
+                <div>
+                    <span>发票种类:</span>
+                    <span>
+                        <if condition="$data.invoice_type eq 1">
+                            个人
+                        <elseif condition="$data.invoice_type eq 2" />
+                            公司
+                        </if>
+                    </span>
+                </div>
+            <div>
+                <span>发票抬头:</span>
+                <span><?=$data['invoice_company']?></span>
+            </div>
+            </if>
+        </section>
+
+        <section class="b2b2c_order_content bgcf">
+            <div class="b2b2c_p16 b2b2c_order_content_inner">
+                <!--循环的商品start-->
+                <volist name='data.product_list' id='v'>
+                    <div class="b2b2c_c bgcf b2b2c_product_box">
+                        <div class="b2b2c_public_procuct_info"
+                             onclick="b2b2cf.order_detail_jump_to_goods_detail({$v.goods_id})">
+                            <div class="clearfix">
+                                <img class="fl" src="{$v.oi_image_url}" alt="">
+                                <div class="fl b2b2c_con_box">
+                                    <p class="b2b2c_ov2">{$v.oi_name}</p>
+                                    <div class="b2b2c_l clearfix">
+                                        <span class="b2b2c_order_info_n fl">商品规格:</span>
+                                        <span class="b2b2c_order_info_n_con toe fl">{$v.product_name}</span>
+                                    </div>
+                                    <div class="b2b2c_r clearfix">
+                                        <span class="fl">
+                                        <?php 
+                                        $sum_price += $v['oi_price']*$v['oi_count'];
+                                        ?>
+                                            ¥{$v.oi_price}x{$v.oi_count}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <?php if($data['order_status'] > 8):?>
+                            <?php if(!$data['comment_id']):?>
+                            <div class="b2b2c_shoping_done fr">
+                                <a href="{:U('User/buyermakeorderrated',array('order_id'=>$data['id'],'product_id'=>$v['product_id']))}"
+                                   >评价</a>
+                            </div>
+                            <?php endif;?>
+                            <?php endif;?>
+                        </div>
+                    </div>
+                </volist>
+                <!--循环的商品end-->
+            </div>
+            <div class="b2b2c_p16 b2b2c_border_tb b2b2c_line_h_2">
+                <div class="clearfix b2b2c_color_80">
+                    <span class="fl"> 商品总价</span>
+                    <span class="fr">
+                        ¥<?php echo number_format($data['order_amount'] - $data['shipping_fee'],1,'.',''); ?>
+                    </span>
+                </div>
+                <div class="clearfix b2b2c_color_80">
+                    <span class="fl">运费</span>
+                    <span class="fr">
+                        ¥{$data.shipping_fee}
+                    </span>
+                </div>
+                <div class="clearfix">
+                    <span class="fl b2b2c_fs_16">订单总价</span>
+                    <span class="fr b2b2c_fs_16">
+                        ¥<?php echo number_format($data['order_amount'],1,'.',''); ?>
+                    </span>
+                </div>
+            </div>
+            <div class="b2b2c_p16 bgcf clearfix b2b2c_line_h_32">
+                <span class="fl b2b2c_fs_18">实付款(含运费)</span>
+                <span class="fr b2b2c_fs_r b2b2c_fs_18">
+                    ¥<?php echo number_format($data['order_amount'],1,'.',''); ?>
+                </span>
+            </div>
+        </section>
+        <section class="bgcf b2b2c_p16 b2b2c_line_h_2">
+            <div class="toe">
+                <span>卖家:</span>
+                <span>{$data.shop_name}</span>
+            </div>
+            <div class="clearfix">
+                <div class="fl">
+                    <span>联系方式:</span>
+                    <span>{$data.shop_tel}</span>
+                </div>
+                <notempty name="data.shop_phone">
+                    <div class="fr">
+                        <span>座机:</span>
+                        <span>{$data.shop_phone}</span>
+                    </div>
+                </notempty>
+            </div>
+        </section>
+        <section class="bgcf b2b2c_color_80">
+            <div class="b2b2c_p16 b2b2c_border_b b2b2c_ptb_8">
+                <div>
+                    <span>订单编号:</span>
+                    <span>{$data.order_sn}</span>
+                </div>
+                <div>
+                    <span>创建时间:</span>
+                    <span>{$data.time_create_str}</span>
+                </div>
+                <notempty name="data.pay_time_str">
+                    <div>
+                        <span>付款时间:</span>
+                        <span>{$data.pay_time_str}</span>
+                    </div>
+                </notempty>
+                <notempty name="data.time_ship_str">
+                    <div>
+                        <span>发货时间:</span>
+                        <span>{$data.time_ship_str}</span>
+                    </div>
+                </notempty>
+            </div>
+            <div class="b2b2c_p16 clearfix b2b2c_ptb_8">
+                <p class="fl">物流信息:&nbsp;</p>
+                <div class="fl">
+                    <div class="b2b2c_marb_4">
+                        <?php 
+                            if(!empty($data['order_logi_no'])):
+                                foreach($data['order_logi_no'] as $val):
+                            ?>  
+                                <p>{$val.name}</p>
+                                <p>{$val.key}</p>
+                                <?php 
+                                endforeach;
+                            else:
+                            ?>
+                            <p>暂无物流信息</p>
+                            <?php endif;?>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!--内容区域end-->
+    <!--待发货底部-->
+    <?php $now_time = time();?>
+    <?php if($data['order_status'] == 6):?>
+        <footer class="b2b2c_order_submit_footer b2b2c_fs_16">
+            <ul>
+                <li class="b2b2c_color_80">
+                    卖家未发货前,您可以
+                </li>
+                <li class="tc">
+                    <a href="javascript:void(0)" class="bgcy" onclick="b2b2cf.apply_order_refund({$data.id})">申请退单</a>
+                </li>
+            </ul>
+        </footer>
+    <?php elseif($data['order_status'] == 1):?>
+        <footer class="b2b2c_order_submit_footer b2b2c_fs_16">
+            <ul>
+                <li>
+                    <span class="b2b2c_time" id="b2b2c_time_payment">
+                        <?php $watitime = C('ORDER_RELEVANT_TIME.WAITFORPAY') - ($now_time - strtotime($data['time_create_str']));?>
+                        <script>var datetime = Math.abs({$watitime});window.setInterval(function() {datetime--;$('#b2b2c_time_payment').html(b2b2cc.timeDate(datetime));}, 1000);</script>
+                    </span>
+                    <span class="b2b2c_color_80 b2b2c_fs_13">后未支付,订单自动关闭</span>
+                </li>
+                <li class="tc">
+                    <a href="{:U('Pay/applypay',array('sn'=>$data['order_sn']))}" class="bgcr">立即付款</a>
+                </li>
+            </ul>
+        </footer>
+    <?php elseif($data['order_status'] == 8):?>
+        <footer class="b2b2c_order_submit_footer b2b2c_fs_16">
+            <ul>
+                <li>
+                    <span class="b2b2c_time" id="b2b2c_time_delivery">
+                    <?php $waittime = C('ORDER_RELEVANT_TIME.WAITFORRECEIPT') - ($now_time - strtotime($data['pay_time_str']));?>
+                    <script>var datetime = Math.abs({$waittime});window.setInterval(function() {datetime--;$('#b2b2c_time_delivery').html(b2b2cc.timeDate(datetime));}, 1000);</script>
+                    </span>
+                    <span class="b2b2c_color_80 b2b2c_fs_13">后将自动确认收货</span>
+                </li>
+                <li class="tc">
+                    <a href="#" class="bgcb" onclick="b2b2cf.make_order_sure({$data.id})">点击收货</a>
+                </li>
+            </ul>
+        </footer>
+    <?php endif;?>   
+</div>
+</body>
+</html>

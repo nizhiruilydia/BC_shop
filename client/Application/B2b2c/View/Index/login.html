@@ -1,0 +1,38 @@
+<include file="Public/header"/>
+
+<div class="b2b2c_layout">
+    <!--头部start-->
+    <header class="b2b2c_login_header">登录博宠商城
+        <a href="javascript:history.back(-1);" class="b2b2c_public_back"></a>
+    </header>
+    <!--头部end-->
+    <!--表单区域start-->
+    <section class="b2b2c_login_box b2b2c_register_box">
+        <form action="#">
+            <div class="b2b2c_login_mobile b2b2c_login_mib">
+                <label for="mobile">
+                    <i class="b2b2c_login_username" title="用户名"></i>
+                </label>
+                <input type="text" name="" id="b2b2c_telno" class="" value="" maxlength="" tabindex="1" aria-label=""placeholder="请输入用户名">
+            </div>
+            <div class="b2b2c_login_mobile b2b2c_login_mib">
+                <label for="password">
+                    <i class="b2b2c_login_userpassword" title="密码"></i>
+                </label>
+                <input type="password" name="" id="b2b2c_password" class="" value="" maxlength="" tabindex="2" aria-label=""placeholder="请您输入密码">
+            </div>
+            <div id="b2b2c_login_button_div"></div>
+            <div class="b2b2c_login_confirm">
+                <input type="button" value="登 录" onclick="b2b2cf.b2b2c_login($('#b2b2c_telno').val(), $('#b2b2c_password').val());">
+            </div>
+            <div class="b2b2c_register_btm">
+                <a href="{:U('Index/register')}" class="b2b2c_register_btm_l tr">立即注册</a>
+                <i></i>
+                <a href="{:U('Index/forgetpassword')}" class=" b2b2c_register_btm_r">忘记密码</a>
+            </div>
+        </form>
+    </section>
+    <!--表单区域end-->
+</div>
+</body>
+</html>

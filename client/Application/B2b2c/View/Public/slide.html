@@ -1,0 +1,12 @@
+<div class="swiper-container swiper-container-horizontal">
+    <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
+        <foreach name="banner" item="vo">
+            <div class="swiper-slide {$vo.active}" style="width:100%;">
+                <a href="javascript:void(0);">
+                    <img class="b2b2c_public_banner_slider_img" data-src="" alt="" src="{$vo.image.0}" data-holder-rendered="true" onclick="window.open('{$vo.url}')"/>
+                </a>
+            </div>
+        </foreach>
+    </div>
+    <div class="swiper-pagination"></div>
+</div>

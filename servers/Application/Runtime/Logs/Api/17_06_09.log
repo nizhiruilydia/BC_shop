@@ -1,0 +1,76 @@
+[ 2017-06-09T15:22:26+08:00 ] 127.0.0.1 /servers/index.php/Api/B2b2cPublic/IndexBanner?token_time=1496992946&token=623e4034d674b1f0e439211ab55676a380c2884e4d22aa1dde0bcfcab13eaa21
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: user_token E:\wamp\www\servers\Application\Api\Controller\PublicController.class.php 第 18 行.
+ERR: 非法操作:IndexBanner
+
+[ 2017-06-09T15:22:39+08:00 ] 127.0.0.1 /servers/index.php/Api/B2b2cPublic/IndexBanner?token_time=1496992959&token=af7727c48897b8fc57a4aaef1ac8a093901688926466f235e07e02d3854537a6
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.015600s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.015600s ]
+NOTIC: [8] Undefined index: user_token E:\wamp\www\servers\Application\Api\Controller\PublicController.class.php 第 18 行.
+ERR: 非法操作:IndexBanner
+
+[ 2017-06-09T15:25:15+08:00 ] 127.0.0.1 /servers/index.php/Api/B2b2cPublic/IndexBanner?token_time=1496993115&token=fa81e261baa3fce635bcf9e47395b3341197e29c63a227e246271521976c9337
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: user_token E:\wamp\www\servers\Application\Api\Controller\PublicController.class.php 第 18 行.
+ERR: 非法操作:IndexBanner
+
+[ 2017-06-09T15:25:18+08:00 ] 127.0.0.1 /servers/index.php/Api/B2b2cPublic/IndexBanner?token_time=1496993118&token=5ee22200ffd97fce5d742df1541b0bb9ed52be1a7c230abca0c8f5cc8d4b2c70
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.015600s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.015600s ]
+NOTIC: [8] Undefined index: user_token E:\wamp\www\servers\Application\Api\Controller\PublicController.class.php 第 18 行.
+ERR: 非法操作:IndexBanner
+
+[ 2017-06-09T15:25:36+08:00 ] 127.0.0.1 /servers/index.php/Api/B2b2cPublic/Demo?token_time=1496993136&token=bff1dcfa1bca2d70cc971069373ea153e4e737584b195462f0a6b4f5691cc28b
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: user_token E:\wamp\www\servers\Application\Api\Controller\PublicController.class.php 第 18 行.
+
+[ 2017-06-09T15:25:39+08:00 ] 127.0.0.1 /servers/index.php/Api/B2b2cPublic/Demo?token_time=1496993139&token=e8831ba9c787047eb151520af5699cfb5cc02f4d1b9d209b7539ce2ce1a2fe3f
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: user_token E:\wamp\www\servers\Application\Api\Controller\PublicController.class.php 第 18 行.
+
+[ 2017-06-09T15:28:22+08:00 ] 127.0.0.1 /servers/index.php/Api/B2b2cPublic/Demo?token_time=1496993302&token=04eaec05147282407c5841cb3601f1833e93b78bbcb21db77dbd4fe9e879b68f
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.015600s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.015600s ]
+NOTIC: [8] Undefined index: user_token E:\wamp\www\servers\Application\Api\Controller\PublicController.class.php 第 18 行.
+
+[ 2017-06-09T15:28:38+08:00 ] 127.0.0.1 /servers/index.php/Api/B2b2cPublic/Demo?token_time=1496993318&token=754cc1853196512edf3d224949871ab5dba27a02185521c0e79613927446fe89
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.015600s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.015600s ]
+NOTIC: [8] Undefined index: user_token E:\wamp\www\servers\Application\Api\Controller\PublicController.class.php 第 18 行.
+

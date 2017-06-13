@@ -1,0 +1,31 @@
+<include file="Public/header"/>
+<div class="b2b2c_layout">
+    <!--头部start-->
+    <header class="b2b2c_public_header_two">收藏夹</header>
+    <a href="{:U('User/home')}" class="b2b2c_public_back"></a>
+    <!--头部end-->
+    <!--主内容区域start-->
+    <main class="b2b2c_index_collect_box">
+        <!--商品一start-->
+        <volist name="list" id="val">
+        <section class="b2b2c_collect_product bgcf clearfix">
+            <div class="img_box fl">
+                <a href="{:U('Index/goodspointinfo',array('goods_id'=>$val['goods_id']))}"><img src="{$val.images.0}" alt=""></a>
+            </div>
+            <div class="b2b2c_collect_inner fr">
+                <p class="toe" title="{$val.goods_name}">{$val.goods_name}</p>
+                <div class="b2b2c_collect_innerbtm">
+                    <p class="fl">
+                        <span>¥{$val.price}</span>
+                    </p>
+                    <input onclick="b2b2cf.cancel_collect_goods({$val.b2b2c_favorite_id})" type="button" class="fr"readonly value="取消收藏">
+                </div>      
+            </div>
+        </section>
+        </volist>
+        <!--商品一end-->
+    </main>
+    <!--主内容区域end-->
+</div>
+</body>
+</html>
