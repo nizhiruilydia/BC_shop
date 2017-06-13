@@ -1,0 +1,55 @@
+<include file="Public/header"/>
+<head/>
+<body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+    <ul class="nav nav-tabs">
+        <?php if(is_role('rbac','index')) { ?><li><a href="{:U('type/index')}">分类管理</a></li><?php } ?>
+        <?php if(is_role('rbac','roleadd')) { ?><li class="active"><a href="{:U('type/type_add')}">添加分类</a></li><?php } ?>
+    </ul>
+    <form  action="{:U('type/type_add_post')}" method="post"d="myform">
+        <div class="table_full">
+            <table width="100%" cellpadding="2" cellspacing="2">
+                <tr>
+                    <th width="180">分类名称</th>
+                    <td><input type="text" name="type_name" value="" class="input" id="rolename"></input><span class="must_red">*</span></td>
+                </tr>
+                <tr>
+                    <th>父级分类</th>
+                    <td>
+                        <select name="type_pid" class="input">
+                            <option value="0">顶级分类</option>
+                            <foreach name="type_list" item="v">
+                            <option value="{$v.goods_type_id}">
+                                <?php echo str_repeat('&nbsp;',substr_count($v['type_path'],'-')*2)?>
+                                {$v.type_name}</option>
+                            </foreach>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <th>分类排序</th>
+                    <td><input type="text" name="type_sort" value="" class="input" ></td>
+                </tr>
+                <tr>
+                    <th>是否出现在导航栏</th>
+                    <td>
+                        <label class="radio inline" for="active_true">
+                            <input type="radio" name="is_nav" value="1" checked id="active_true"/>是
+                        </label>
+                        <label class="radio inline" for="active_false">
+                            <input type="radio" name="is_nav" value="0" id="active_false">否
+                        </label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn_submit  J_ajax_submit_btn">提交</button>
+            <!--<a class="btn" href="__URL__">返回</a>-->
+        </div>
+    </form>
+</div>
+<load href="__PUBLICS__/js/common.js"/>
+</body>
+</html>
