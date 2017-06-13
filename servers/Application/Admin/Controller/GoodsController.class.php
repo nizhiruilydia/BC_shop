@@ -31,5 +31,9 @@ class GoodsController extends PrivateController {
 	 *+--------------------------------------------------------------------------------------------------------------------
 	**/
 	public function 方法(){}
+	public function ad()
+	{
+		echo 123;
+	}
 }
 ?>
